@@ -1,0 +1,120 @@
+<!DOCTYPE html>
+<html lang="ru">
+
+<head>
+    <meta charset="UTF-8">
+    <title>Weather App</title>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css">
+    <style>
+        #map {
+            width: 450px;
+            height: 450px;
+        }
+    </style>
+</head>
+
+<body>
+
+    <div class="py-5 text-center bg-light">
+        <div class="container">
+            <h2>Weather App</h2>
+            <p class="lead">
+                Here you can get the weather forecast of the city you are interested in.</p>
+        </div>
+    </div>
+    <div class="container">
+        <div class="p-3"> </div>
+        <div class="row">
+            <div class="col-md-5 offset-1">
+
+                <form method="POST">
+                    {% csrf_token %}
+                    <div class="field has-addons">
+                        <div class="control is-expanded">
+                            {{ form.name }}
+
+                        </div>
+
+                        <div class="control">
+                            <button type="submit" class="button btn-primary">
+                                Add City
+                            </button>
+
+                        </div>
+                    </div>
+                </form>
+                <br>
+                <div id="map">
+                    <script type="text/javascript">
+                        // Определяем переменную map
+                        var map;
+
+                        // Функция initMap которая отрисует карту на странице
+                        function initMap() {
+
+                            // В переменной map создаем объект карты GoogleMaps и вешаем эту переменную на <div id="map"></div>
+                            map = new google.maps.Map(document.getElementById('map'), {
+                                // При создании объекта карты необходимо указать его свойства
+                                // center - определяем точку на которой карта будет центрироваться
+                                center: {
+                                    lat: 47.85,
+                                    lng: 35.12
+                                },
+                                // zoom - определяет масштаб. 0 - видно всю платнеу. 18 - видно дома и улицы города.
+                                zoom: 10
+                            });
+                        }
+                    </script>
+                </div>
+
+            </div>
+
+            <div class="col-md-4 offset-2">
+                {% for city_weather in weather_data %}
+                <div class="box">
+                    <article class="media">
+                        <div class="media-left">
+                            <figure class="image is-50x50">
+                                <img src="http://openweathermap.org/img/w/{{ city_weather.icon }}.png" alt="Image">
+                            </figure>
+                        </div>
+                        <div class="media-content">
+                            <div class="content">
+                                <p>
+                                    <span class="title">{{ city_weather.city }}</span>
+                                    <br>
+                                    <span class="subtitle">{{ city_weather.temperature }}° С</span>
+                                    <br> {{ city_weather.description }}
+                                    <h6>pressure: {{ city_weather.pressure }} mm Hg</h6>
+                                    <h6>Wind: {{ city_weather.wind }} m/s</h6>
+                                </p>
+                                <form action="/delete/{{ city_weather.id }}" method="POST">
+                                    {% csrf_token %}
+                                    <button type="submit" class="button btn-danger">
+                                        Delete City
+                                    </button>
+                                </form>
+                            </div>
+                            <br>
+                        </div>
+                    </article>
+                </div>
+                {% endfor %}
+            </div>
+            <br>
+        </div>
+    </div>
+    <footer class="footer-copyright text-center py-3 bg-light">
+
+        <p align-center>Weather blog built <a rel="nofollow noopener" target="_blank"
+                href="https://getbootstrap.com/"></a> by <a rel="nofollow noopener" target="_blank"
+                href="https://twitter.com/mdo">@me</a>.</p>
+        <p>
+            <a href="#" class="">Back to top</a>
+        </p>
+
+    </footer>
+    <script async defer src="https://maps.googleapis.com/maps/api/js?callback=initMap"></script>
+</body>
+
+</html>
