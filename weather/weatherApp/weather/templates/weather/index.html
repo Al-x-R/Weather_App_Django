@@ -14,7 +14,6 @@
 </head>
 
 <body>
-
     <div class="py-5 text-center bg-light">
         <div class="container">
             <h2>Weather App</h2>
@@ -32,14 +31,11 @@
                     <div class="field has-addons">
                         <div class="control is-expanded">
                             {{ form.name }}
-
                         </div>
-
                         <div class="control">
                             <button type="submit" class="button btn-primary">
                                 Add City
                             </button>
-
                         </div>
                     </div>
                 </form>
@@ -48,10 +44,8 @@
                     <script type="text/javascript">
                         // Определяем переменную map
                         var map;
-
                         // Функция initMap которая отрисует карту на странице
                         function initMap() {
-
                             // В переменной map создаем объект карты GoogleMaps и вешаем эту переменную на <div id="map"></div>
                             map = new google.maps.Map(document.getElementById('map'), {
                                 // При создании объекта карты необходимо указать его свойства
@@ -66,9 +60,7 @@
                         }
                     </script>
                 </div>
-
             </div>
-
             <div class="col-md-4 offset-2">
                 {% for city_weather in weather_data %}
                 <div class="box">
@@ -105,14 +97,13 @@
         </div>
     </div>
     <footer class="footer-copyright text-center py-3 bg-light">
-
         <p align-center>Weather blog built <a rel="nofollow noopener" target="_blank"
                 href="https://getbootstrap.com/"></a> by <a rel="nofollow noopener" target="_blank"
-                href="https://twitter.com/mdo">@me</a>.</p>
+                href="https://twitter.com/mdo">@me</a>.
+        </p>
         <p>
             <a href="#" class="">Back to top</a>
         </p>
-
     </footer>
     <script async defer src="https://maps.googleapis.com/maps/api/js?callback=initMap"></script>
 </body>
