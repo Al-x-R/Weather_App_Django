@@ -68,9 +68,6 @@
 
                                 // Указываем на какой карте он должен появится. (На странице ведь может быть больше одной карты)
                                 map: map,
-
-                                // Пишем название маркера - появится если навести на него курсор и немного подождать
-                                title: 'city'
                             });
                             google.maps.event.addListener(map, 'click', function (event) {
                                 alert(event.latLng); // в event.latLng  получаем координаты по clickу
