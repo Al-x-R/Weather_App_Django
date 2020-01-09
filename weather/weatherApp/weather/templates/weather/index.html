@@ -7,16 +7,9 @@
     <title>Weather App</title>
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css">
     <link rel="stylesheet" href="{% static 'css/style.css' %} ">
-<!--    <style>-->
-<!--        #map {-->
-<!--            width: 450px;-->
-<!--            height: 450px;-->
-<!--        }-->
-<!--    </style>-->
 </head>
 
 <body>
-
     <div class="py-5 text-center bg-light">
         <div class="container">
             <h2>Weather App</h2>
@@ -31,27 +24,21 @@
 
                 <form method="POST">
                     {% csrf_token %}
-                    <div class="field has-addons" class="inline" >
+                    <div class="field has-addons" class="inline">
                         <div class="control is-expanded">
                             {{ form.name }}
-
                         </div>
-
                         <div class="control">
                             <button type="submit" class="button btn-primary">
                                 Add City
                             </button>
-
                         </div>
                     </div>
                 </form>
                 <br>
                 <div id="map">
-
                 </div>
-
             </div>
-
             <div class="col-md-4 offset-2">
                 {% for city_weather in weather_data %}
                 <div class="box">
@@ -88,14 +75,12 @@
         </div>
     </div>
     <footer class="footer-copyright text-center py-3 bg-light">
-
         <p align-center>Weather blog built <a rel="nofollow noopener" target="_blank"
                 href="https://getbootstrap.com/"></a> by <a rel="nofollow noopener" target="_blank"
                 href="https://twitter.com/mdo">@me</a>.</p>
         <p>
             <a href="#" class="">Back to top</a>
         </p>
-
     </footer>
     <script src="{% static 'js/scripts.js' %}"></script>
     <script async defer src="https://maps.googleapis.com/maps/api/js?callback=initMap"></script>
