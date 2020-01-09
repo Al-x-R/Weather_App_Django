@@ -1,19 +1,22 @@
 <!DOCTYPE html>
+{% load static  %}
 <html lang="ru">
 
 <head>
     <meta charset="UTF-8">
     <title>Weather App</title>
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css">
-    <style>
-        #map {
-            width: 450px;
-            height: 450px;
-        }
-    </style>
+    <link rel="stylesheet" href="{% static 'css/style.css' %} ">
+<!--    <style>-->
+<!--        #map {-->
+<!--            width: 450px;-->
+<!--            height: 450px;-->
+<!--        }-->
+<!--    </style>-->
 </head>
 
 <body>
+
     <div class="py-5 text-center bg-light">
         <div class="container">
             <h2>Weather App</h2>
@@ -28,54 +31,27 @@
 
                 <form method="POST">
                     {% csrf_token %}
-                    <div class="field has-addons">
+                    <div class="field has-addons" class="inline" >
                         <div class="control is-expanded">
                             {{ form.name }}
+
                         </div>
+
                         <div class="control">
                             <button type="submit" class="button btn-primary">
                                 Add City
                             </button>
+
                         </div>
                     </div>
                 </form>
                 <br>
                 <div id="map">
-                    <script type="text/javascript">
-                        // Определяем переменную map
-                        var map;
-                        // Функция initMap которая отрисует карту на странице
-                        function initMap() {
-                            // В переменной map создаем объект карты GoogleMaps и вешаем эту переменную на <div id="map"></div>
-                            map = new google.maps.Map(document.getElementById('map'), {
-                                // При создании объекта карты необходимо указать его свойства
-                                // center - определяем точку на которой карта будет центрироваться
-                                center: {
-                                    lat: 47.85,
-                                    lng: 35.12
-                                },
-                                // zoom - определяет масштаб. 0 - видно всю платнеу. 18 - видно дома и улицы города.
-                                zoom: 10
-                            });
-                            // Создаем маркер на карте
-                            var marker = new google.maps.Marker({
 
-                                // Определяем позицию маркера
-                                position: {
-                                    lat: 47.85,
-                                    lng: 35.12
-                                },
-
-                                // Указываем на какой карте он должен появится. (На странице ведь может быть больше одной карты)
-                                map: map,
-                            });
-                            google.maps.event.addListener(map, 'click', function (event) {
-                                alert(event.latLng); // в event.latLng  получаем координаты по clickу
-                            });
-                        }
-                    </script>
                 </div>
+
             </div>
+
             <div class="col-md-4 offset-2">
                 {% for city_weather in weather_data %}
                 <div class="box">
@@ -112,14 +88,16 @@
         </div>
     </div>
     <footer class="footer-copyright text-center py-3 bg-light">
+
         <p align-center>Weather blog built <a rel="nofollow noopener" target="_blank"
                 href="https://getbootstrap.com/"></a> by <a rel="nofollow noopener" target="_blank"
-                href="https://twitter.com/mdo">@me</a>.
-        </p>
+                href="https://twitter.com/mdo">@me</a>.</p>
         <p>
             <a href="#" class="">Back to top</a>
         </p>
+
     </footer>
+    <script src="{% static 'js/scripts.js' %}"></script>
     <script async defer src="https://maps.googleapis.com/maps/api/js?callback=initMap"></script>
 </body>
 
